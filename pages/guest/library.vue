@@ -1,10 +1,13 @@
 <template>
 <div class="main">
-
+  <div class="container--menu">
     <div class="menu--library">
       <p class="menu--library--title">{{library_name}}</p>
-      <NuxtLink class="menu--library--list" to="/">戻る</NuxtLink>
+      <p class="menu--library--list">
+        <NuxtLink class="menu--library--list--link" to="/">戻る</NuxtLink>
+      </p>
     </div>
+  </div>
 
   <div class="container--search">
     <form @submit.prevent="searchWord">
@@ -81,35 +84,45 @@ export default {
 <style scoped>
 .main{
   background: #4169e1;
-  padding-bottom: 20px;
+  padding: 30px 0;
+}
+.container--menu{
+  width: 100%;
+  text-align: center;
 }
 .menu--library{
-  height: auto;
+  width: 40%;
   display: inline-block;
   background: #b0c4de;
   border-radius: 5px;
-  margin: 40px 50px;
-  padding: 0 30px;
+  padding: 10px 30px;
+  margin: 30px auto;
+
 }
 .menu--library--title{
   display: inline-block;
   color: #191970;
   font-size: 50px;
+  width: 100%;
 }
 .menu--library--list{
   display: inline-block;
+  width: 100%;
+}
+.menu--library--list--link{
+  display: inline-block;
   color: #191970;
-  font-size: 25px;
+  width: 50px;
+  font-size: 20px;
   font-weight: bold;
   border: #191970 solid 2px;
   border-radius: 5px;
-  margin: 0 20px;
-  padding: 5px 10px;
   text-decoration: none;
   cursor: pointer;
+  padding: 5px 7px;
 }
 
-.menu--library--list:hover{
+.menu--library--list--link:hover{
   background: #191970;
   color: #fff;
 }
@@ -180,15 +193,16 @@ export default {
     border: solid 2px #e6e6fa;
   }
   .input--button{
-    background: #e6e6fa;
+    background: #fff;
     width: 80px;
     height: 40px;
     border-radius: 5px;
+    border: #191970 2px solid;
     font-weight: bold;
     cursor: pointer;
   }
   .input--button:hover{
-    background: #b0c4de;
+    background: #191970;
     color: #e6e6fa;
   }
 
@@ -207,6 +221,7 @@ export default {
    .copy{
      display: none;
    }
+
  }
 
 </style>

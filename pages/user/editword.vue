@@ -166,12 +166,21 @@ export default {
   background: #fff;
   display: inline-block;
   border-radius: 5px;
+  border: #191970 solid 2px;
   margin: 20px 50px;
   padding: 10px 20px;
+}
+.edit--title:hover{
+  background: #191970;
+  color: #fff;
 }
 .edit--title--a{
   text-decoration: none;
 }
+.edit--title--a:hover{
+  color: #fff;
+}
+
   .table{
     border-collapse: collapse;
     width: 80%;
@@ -285,15 +294,16 @@ export default {
     text-align: center;
   }
   .input--button{
-    background: #e6e6fa;
+    background: #fff;
     width: 80px;
     height: 40px;
     border-radius: 5px;
     font-weight: bold;
+    border: #191970 solid 2px;
     cursor: pointer;
   }
   .input--button:hover{
-    background: #b0c4de;
+    background: #191970;
     color: #e6e6fa;
   }
 

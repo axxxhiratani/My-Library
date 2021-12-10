@@ -2,10 +2,8 @@
 <div class="main">
 
   <div class="title">
-    <!-- <img src="https://d1jsua0yydl5v7.cloudfront.net/img/library.png" alt=""> -->
     <div class="title--content">
-      <p class="title--message">世界に1つだけの　　　　　　　</p>
-      <p class="title--message">プログラミング辞書を作ろう</p>
+      <p class="title--message">世界に1つだけのプログラミング辞書を作ろう</p>
     </div>
   </div>
   <div class="title--columu">
@@ -215,7 +213,8 @@ export default {
 .title--content{
   width: 80%;
   height: auto;
-  margin-left: 20px;
+  margin: 0 auto;
+  text-align: center;
   color          : #ffffff;            /* 文字の色 */
   font-size      : 50px;               /* 文字のサイズ */
   letter-spacing : 4px;                /* 文字間 */
@@ -234,7 +233,7 @@ export default {
   font-size: 22px;
   font-weight: bold;
   width: 100%;
-  margin-top: 50px;
+  margin-top: 90px;
 }
 
 .title--everyone{
@@ -276,14 +275,16 @@ export default {
     border: solid 2px #e6e6fa;
   }
   .input--button{
-    background: #e6e6fa;
+    background: #fff;
     width: 80px;
     height: 40px;
     border-radius: 5px;
+    color: #003366;
+    border: #003366 solid 2px;
     font-weight: bold;
   }
   .input--button:hover{
-    background: #b0c4de;
+    background: #003366;
     color: #e6e6fa;
   }
 

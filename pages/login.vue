@@ -111,15 +111,16 @@ export default {
     text-align: center;
   }
   .input--button{
-    background: #e6e6fa;
+    background: #fff;
     width: 80px;
     height: 40px;
     border-radius: 5px;
+    border: #191970 solid 2px;
     font-weight: bold;
     cursor: pointer;
   }
   .input--button:hover{
-    background: #b0c4de;
+    background: #191970;
     color: #e6e6fa;
   }
 
