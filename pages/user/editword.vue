@@ -166,6 +166,7 @@ export default {
   background: #fff;
   display: inline-block;
   border-radius: 5px;
+  color: #003366;
   border: #191970 solid 2px;
   margin: 20px 50px;
   padding: 10px 20px;
@@ -299,6 +300,7 @@ export default {
     height: 40px;
     border-radius: 5px;
     font-weight: bold;
+    color: #003366;
     border: #191970 solid 2px;
     cursor: pointer;
   }

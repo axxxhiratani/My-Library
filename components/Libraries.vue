@@ -282,12 +282,12 @@ export default {
     color: #003366;
     border: #003366 solid 2px;
     font-weight: bold;
+    cursor: pointer;
   }
   .input--button:hover{
     background: #003366;
     color: #e6e6fa;
   }
-
   .box--library > a > img{
     width: 80%;
     display: inline-block;

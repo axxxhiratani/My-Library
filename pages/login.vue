@@ -116,6 +116,7 @@ export default {
     height: 40px;
     border-radius: 5px;
     border: #191970 solid 2px;
+    color: #003366;
     font-weight: bold;
     cursor: pointer;
   }

@@ -197,6 +197,7 @@ export default {
     width: 80px;
     height: 40px;
     border-radius: 5px;
+    color: #003366;
     border: #191970 2px solid;
     font-weight: bold;
     cursor: pointer;
