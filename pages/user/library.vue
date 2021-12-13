@@ -195,7 +195,7 @@ export default {
   width: 80%;
 }
 .input--text{
-    width: 80%;
+    width: 75%;
     height: 40px;
     margin: 10px auto;
     border-radius: 5px;
@@ -203,7 +203,7 @@ export default {
   }
   .input--button{
     background: #fff;
-    width: 80px;
+    width: 15%;
     height: 40px;
     border-radius: 5px;
     border: #191970 solid 2px;

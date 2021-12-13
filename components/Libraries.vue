@@ -268,7 +268,7 @@ export default {
   width: 80%;
 }
 .input--text{
-    width: 80%;
+    width: 75%;
     height: 40px;
     margin: 10px auto;
     border-radius: 5px;
@@ -313,7 +313,7 @@ export default {
   }
   .container--library--infomation--create{
     color: #696969;
-    font-size: 5px;
+    font-size: 15px;
   }
 
   .favorite{

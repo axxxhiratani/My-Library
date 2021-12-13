@@ -12,10 +12,10 @@
 
     <div class="container--library">
       <div class="box--library" v-for="library in myLibrary" :key="library.id">
-        <a @click="showLibrary(library.library_id[0].id)">
-          <img v-bind:src="library.library_id[0].language_id[0].image" alt="">
-          <p class="container--library--name">{{library.library_id[0].name}}</p>
-          <p class="container--library--text">使用言語：{{library.library_id[0].language_id[0].name}}</p>
+        <a @click="showLibrary(library.library_id.id)">
+          <img v-bind:src="library.library_id.language_id.image" alt="">
+          <p class="container--library--name">{{library.library_id.name}}</p>
+          <p class="container--library--text">使用言語：{{library.library_id.language_id.name}}</p>
         </a>
       </div>
     </div>
@@ -131,6 +131,8 @@ export default {
   font-weight: bold;
 }
 .container--mypage--menu{
+  font-size: 10px;
+  font-weight: bold;
   display: flex;
   justify-content: space-around;
 }

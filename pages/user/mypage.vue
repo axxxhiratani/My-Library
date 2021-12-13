@@ -36,7 +36,5 @@ export default {
     this.authenticationUser();
     this.getUserId(this.user);
   }
-
-
 }
 </script>

@@ -122,6 +122,8 @@ export default {
   font-weight: bold;
 }
 .container--mypage--menu{
+  font-size: 10px;
+  font-weight: bold;
   display: flex;
   justify-content: space-around;
 }
