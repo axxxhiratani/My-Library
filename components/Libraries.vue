@@ -20,10 +20,10 @@
   <div class="container--library">
     <div class="box--library" v-for="library in myLibrary" :key="library.id" v-show="library.view_permit">
         <a @click="showLibrary(library.id)">
-          <img v-bind:src="library.language_id[0].image" alt="">
+          <img v-bind:src="library.language_id.image" alt="">
             <p class="container--library--name">{{library.name}}</p>
-          <p class="container--library--text">使用言語：{{library.language_id[0].name}}</p>
-          <p class="container--library--text">作成者：{{library.user_id[0].name}}</p>
+          <p class="container--library--text">使用言語：{{library.language_id.name}}</p>
+          <p class="container--library--text">作成者：{{library.user_id.name}}</p>
         </a>
           <div class="container--library--infomation">
             <p @click="countUpFavorite(library.id)"  class="container--library--infomation--favorite">
@@ -276,7 +276,7 @@ export default {
   }
   .input--button{
     background: #fff;
-    width: 80px;
+    width: 15%;
     height: 40px;
     border-radius: 5px;
     color: #003366;
