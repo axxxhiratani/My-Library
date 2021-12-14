@@ -1,11 +1,6 @@
 <template>
 <div class="main">
 
-  <div class="title">
-    <div class="title--content">
-      <p class="title--message">世界に1つだけのプログラミング辞書を作ろう</p>
-    </div>
-  </div>
   <div class="title--columu">
     <p class="title--everyone">
       みんなの辞書
@@ -18,6 +13,7 @@
     </form>
   </div>
   <div class="container--library">
+    <div v-show="message" class="message">{{message}}</div>
     <div class="box--library" v-for="library in myLibrary" :key="library.id" v-show="library.view_permit">
         <a @click="showLibrary(library.id)">
           <img v-bind:src="library.language_id.image" alt="">
@@ -45,10 +41,11 @@ import firebase from '~/plugins/firebase'
 export default {
   data() {
     return {
-      user:"",
+      user:this.$store.state.user.user_id,
       myLibrary:[],
       searchName:"",
       allFavorite:[],
+      message:null,
     }
   },
   methods:{
@@ -58,8 +55,6 @@ export default {
       const resData = await this.$axios.get(
           "https://blooming-sierra-76216.herokuapp.com/api/v1/library"
         );
-      console.log("getLibrary");
-      console.log(resData.data.libraries);
       this.myLibrary = resData.data.libraries;
     },
 
@@ -67,7 +62,6 @@ export default {
     async getFavorite(){
       const resData = await this.$axios.get("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite");
       this.allFavorite = resData.data.favorites;
-      console.log(resData.data.favorites);
     },
 
     //単語で辞書を検索する。
@@ -79,7 +73,13 @@ export default {
       {
         params:sendData
       });
+      console.log(`検索結果${resData.data.libraries.length}`);
       this.myLibrary = resData.data.libraries;
+      if(resData.data.libraries.length == 0){
+        this.message = "見つかりませんでした";
+      }else{
+        this.message = null;
+      }
     },
 
     //辞書を表示するページに遷移させる。
@@ -164,7 +164,9 @@ export default {
     // ユーザー情報の取得
     async authenticationUser(){
       await firebase.auth().onAuthStateChanged((user) => {
-        this.getUserId(user.uid);
+        if(user){
+          this.getUserId(user.uid);
+        }
       })
     },
 
@@ -178,8 +180,17 @@ export default {
         params:sendData
       });
       this.user = resData.data.user[0].id;
+      console.log(`loguser::${this.$store.state.user.user_id}`);
+      console.log(this.user);
     },
+
+    async prepare(){
+      await this.authenticationUser();
+      await this.getLibrary();
+      await this.getFavorite();
+    }
   },
+
   filters:{
     changedate(date){
       const dt = Date.parse(date);
@@ -190,9 +201,10 @@ export default {
   computed:{
   },
   created(){
-    this.authenticationUser();
-    this.getLibrary();
-    this.getFavorite();
+    // this.authenticationUser();
+    // this.getLibrary();
+    // this.getFavorite();
+    this.prepare();
   }
 }
 </script>
@@ -247,6 +259,7 @@ export default {
 }
 .container--library{
   width: 100%;
+  margin: 30px 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -290,6 +303,7 @@ export default {
   }
   .box--library > a > img{
     width: 80%;
+    height: 200px;
     display: inline-block;
     border: 3px solid #fffafa;
     margin-top:10px;

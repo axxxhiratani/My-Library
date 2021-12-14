@@ -1,6 +1,8 @@
 <template>
-
-<Libraries/>
+<div>
+  <Introduction/>
+  <Libraries/>
+</div>
 </template>
 
 <script>

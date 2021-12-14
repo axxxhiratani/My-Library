@@ -42,17 +42,20 @@ export default {
     return {
       email: null,
       password: null,
+      uid:null,
     };
   },
   methods: {
-    async login() {
+    async getFirebase() {
       try {
-        firebase
+        await firebase
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-          alert('ログインが完了しました')
-          this.$router.push('/')
+        .then((data) => {
+          console.log(data.user.uid);
+          this.uid = data.user.uid;
+          this.$router.push('/');
+          alert("ログインが完了しました");
         })
         .catch((error) => {
           switch (error.code) {
@@ -77,6 +80,23 @@ export default {
       } catch {
         alert("メールアドレスまたはパスワードが間違っております");
       }
+    },
+
+    async getUserId(uid){
+      const sendData = {
+        uuid:this.uid,
+      };
+      const resData = await this.$axios.get("https://blooming-sierra-76216.herokuapp.com/api/v1/investigate/userid",
+      {
+        params:sendData
+      });
+      console.log(resData.data.user[0].name);
+      this.$store.commit("user/loginUser",resData.data.user[0]);
+    },
+
+    async login(){
+      await this.getFirebase();
+      await this.getUserId();
     },
   },
 };

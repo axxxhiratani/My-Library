@@ -146,16 +146,17 @@ export default {
     },
     async insertUserDatabase(){
       try{
-        await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/user",{
+        const resData = await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/user",{
           name:this.name,
           uuid:this.uuid,
           work_id:this.work_id,
           language_id:this.language_id,
           introduction:this.introduction,
         });
+        console.log(`register data ${resData.data.user.id}`);
+        console.log(`register data ${resData.data.user.name}`);
+        this.$store.commit("user/loginUser",resData.data.user);
         alert("登録が完了しました");
-        this.$router.push("/");
-
       }catch{
         alert("メールアドレスがすでに登録されています");
       }

@@ -69,6 +69,8 @@ export default {
           .signOut()
           .then(()=>{
             alert("ログアウトが完了しました。");
+            this.$store.commit("user/logoutUser");
+
             this.$router.push("/login");
           });
       } catch (error) {
@@ -89,7 +91,6 @@ export default {
       })
     },
     showMenu(){
-      console.log("menu");
       const target = document.getElementById("menu");
       const nav = document.getElementById("nav--draw");
       target.classList.toggle('open');

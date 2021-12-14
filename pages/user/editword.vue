@@ -26,6 +26,7 @@
         </div>
 
 
+
         <div class="container--register__input">
           <validation-provider v-slot="{ errors }" rules="required">
             <label for="wordNote">備考</label><br>
@@ -101,6 +102,12 @@ export default {
       this.words=resData.data.words[0].words;
     },
     async addWord(){
+      console.log("note1");
+      if(this.wordNote === ""){
+        this.wordNote = "-";
+        console.log("note2");
+      }
+      console.log("note3");
       const sendData = {
         library_id:this.library_id,
         name:this.wordName,
@@ -109,9 +116,12 @@ export default {
       };
       await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/word",sendData);
       this.getLibrary();
-      this.wordName="";
-      this.wordMean="";
-      this.wordNote="";
+      // document.getElementById("wordName").value = "";
+      // document.getElementById("wordMean").value = "";
+      // document.getElementById("wordNote").value = "";
+      this.wordName = "";
+      this.wordMean = "";
+      this.wordNote = "";
       alert("単語を追加しました。");
     },
     async updateWord(id,name,meaning,note){

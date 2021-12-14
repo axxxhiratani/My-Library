@@ -1,13 +1,10 @@
 <template>
   <div class="container--library">
     <div class="box--library" v-for="library in myLibrary" :key="library.id">
-      <a @click="showLibrary(library.id)">
-        <img v-bind:src="library.language_id[0].image" alt="">
-        <p class="container--library--name">{{library.name}}</p>
-        <p class="container--library--text">使用言語：{{library.language_id[0].name}}</p>
-        <div class="container--library--infomation">
-          <p class="container--library--infomation--create">作成日：{{library.created_at | changedate}}</p>
-        </div>
+      <a @click="showLibrary(library.library_id.id)">
+        <img v-bind:src="library.library_id.language_id.image" alt="">
+        <p class="container--library--name">{{library.library_id.name}}</p>
+        <p class="container--library--text">使用言語：{{library.library_id.language_id.name}}</p>
       </a>
     </div>
   </div>
@@ -26,10 +23,18 @@ export default {
   props:[],
   methods:{
     async getLibrary(){
+
+      const sendData={
+        user_id:this.user_id,
+      };
       const resData = await this.$axios.get(
-          `https://blooming-sierra-76216.herokuapp.com/api/v1/user/${this.user_id}`
+          `https://blooming-sierra-76216.herokuapp.com/api/v1/investigate/favoritelist`,
+          {
+            params:sendData
+          }
         );
-      this.myLibrary = resData.data.libraries[0].libraries;
+
+      this.myLibrary = resData.data.favorite;
     },
     async getFavorite(){
       const resData = await this.$axios.get("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite");
@@ -38,24 +43,22 @@ export default {
     showLibrary(id){
       console.log("show"+id);
       this.$router.push({
-        path:"/user/library",
+        path:"/guest/library",
         query:{
           library_id:id,
         }
       });
     },
+
   },
   filters:{
       changedate(date){
-      const dt = Date.parse(date);
-      var date = new Date(dt);
-      return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDay()}`;
+        const dt = Date.parse(date);
+        return dt;
     }
 
   },
   mounted(){
-
-    //settimeoutしたほうが良い？？
     this.getLibrary();
   }
 }
@@ -66,6 +69,7 @@ export default {
 .main{
   background: #f5f5f5;
 }
+
 .container--library{
   width: 100%;
   display: flex;
@@ -109,6 +113,7 @@ export default {
 
   .box--library > a >img{
     width: 80%;
+    height: 200px;
     display: inline-block;
     border: 3px solid #fffafa;
     margin-top:10px;
@@ -127,9 +132,8 @@ export default {
   }
 
   .container--library--infomation{
-    /* display: flex;
-    justify-content: space-between; */
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
   }
   .container--library--infomation--create{
     color: #696969;
