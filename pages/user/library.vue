@@ -3,10 +3,11 @@
   <div class="container--menu">
     <div class="menu--library">
       <p class="menu--library--title">{{library_name}}</p>
-      <p class="menu--library--list">
-        <a class="menu--library--list--link" @click="editWord">編集</a>
+      <div class="menu--library--list">
+        <a class="menu--library--list--link" @click="editWord">単語管理</a>
+        <a class="menu--library--list--link" @click="editLibrary">辞書編集</a>
         <NuxtLink class="menu--library--list--link" to="/user/mypage">戻る</NuxtLink>
-      </p>
+      </div>
     </div>
   </div>
 
@@ -83,6 +84,14 @@ export default {
         }
       });
     },
+    editLibrary(){
+      this.$router.push({
+        path:"/user/editlibrary",
+        query:{
+          library_id:this.library_id,
+        }
+      });
+    },
   },
   created(){
     this.getLibrary();
@@ -114,13 +123,16 @@ export default {
   width: 100%;
 }
 .menu--library--list{
-  display: inline-block;
+  margin: 0 auto;
   width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .menu--library--list--link{
   display: inline-block;
   color: #191970;
-  width: 50px;
+  width: 20%;
   font-size: 20px;
   font-weight: bold;
   border: #191970 solid 2px;
@@ -128,6 +140,7 @@ export default {
   text-decoration: none;
   cursor: pointer;
   padding: 5px 7px;
+  margin: 5px 5px;
 }
 
 .menu--library--list--link:hover{
@@ -230,6 +243,9 @@ export default {
  @media screen and (max-width: 768px) {
    .copy{
      display: none;
+   }
+   .menu--library--list--link{
+     width: 90%;
    }
  }
 

@@ -104,7 +104,7 @@ export default {
     },
     //イイネを増やす/減らす
     async countUpFavorite(id){
-
+      let message_favo = "";
       if(this.user){
         if(this.checkFavorite(id)){
           const sendData = {
@@ -112,15 +112,15 @@ export default {
             user_id:this.user
           };
           await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite",sendData);
-          alert(`お気に入り登録しました`);
+          message_favo = "お気に入り登録しました";
         }else{
-
             const favorite_id = this.getFavariteId(id);
             await this.$axios.delete("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite/" + favorite_id);
-            alert(`お気に入りを解除しました`);
+            message_favo = "お気に入り解除しました";
         }
         this.getLibrary();
         this.getFavorite();
+        alert(message_favo);
       }else{
         alert("ログインしてください");
       }

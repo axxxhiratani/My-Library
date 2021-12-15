@@ -26,7 +26,6 @@ export default {
         path:"/user/mypage",
       });
     },
-
     createLibrary(){
       this.$router.push({
         path:"/user/createlibrary",

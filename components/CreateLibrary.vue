@@ -15,7 +15,7 @@
         <div class="container--store__input">
           <validation-provider v-slot="{ errors }" rules="required">
             <label for="language_id">使用言語</label><br>
-            <select name="得意言語" v-model="language_id" id="language_id" class="input--select">
+            <select name="使用言語" v-model="language_id" id="language_id" class="input--select">
               <option v-bind:value="language.id" v-for="language in languageList" :key="language.id">
                 {{language.name}}
               </option>
@@ -41,7 +41,7 @@
             type="submit"
             :disabled="ObserverProps.invalid || !ObserverProps.validated"
             class="input--button">
-            送信
+            作成
           </button>
         </div>
       </validation-observer>

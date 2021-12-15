@@ -1,7 +1,7 @@
 <template>
 <div class="main">
   <div class="edit--title">
-    <NuxtLink class="edit--title--a" to="/user/mypage">戻る</NuxtLink>
+    <a @click="back">戻る</a>
   </div>
 
   <div class="container--search">
@@ -116,9 +116,9 @@ export default {
       };
       await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/word",sendData);
       this.getLibrary();
-      // document.getElementById("wordName").value = "";
-      // document.getElementById("wordMean").value = "";
-      // document.getElementById("wordNote").value = "";
+      document.getElementById("wordName").value = "";
+      document.getElementById("wordMean").value = "";
+      document.getElementById("wordNote").value = "";
       this.wordName = "";
       this.wordMean = "";
       this.wordNote = "";
@@ -160,6 +160,14 @@ export default {
         }
       });
     },
+    back(){
+      this.$router.push({
+        path:"/user/library",
+        query:{
+          library_id:this.library_id
+        }
+      });
+    },
   },
   created(){
     this.getLibrary();
@@ -180,6 +188,7 @@ export default {
   border: #191970 solid 2px;
   margin: 20px 50px;
   padding: 10px 20px;
+  cursor: pointer;
 }
 .edit--title:hover{
   background: #191970;
