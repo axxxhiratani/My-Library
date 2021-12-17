@@ -11,7 +11,7 @@
 
   <div class="introduction--container">
     <div class="introduction--overview">
-      <p class="introduction--overview--title"><sapn class="introduction--overview--title--span">MyLibrary</sapn>とは</p>
+      <p class="introduction--overview--title"><span class="introduction--overview--title--span">MyLibrary</span>とは</p>
       <p class="introduction--overview--content">プログラミングのコードやIT用語をまとめた自分だけの辞書を作成できるサービスです。</p>
     </div>
     <div class="introduction--detail">
@@ -107,7 +107,7 @@
 
 }
 .introduction--detail--box{
-  width: 40%;
+  width: 35%;
 }
 .introduction--detail--box--img{
   width: 100%;
@@ -125,16 +125,29 @@
 }
 @media screen and (max-width: 768px) {
   .introduction--detail--box{
-    /* width: 100%; */
+    width: 100%;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    border: 1px #fffafa solid;
+    border-radius: 3px;
+    box-shadow: 0px 8px 10px #c0c0c0;
+
   }
 .introduction--detail--box--img{
+  padding: 30px 5px;
   width: 100%;
 }
 .introduction--detail--box--img > img{
   width: 100%;
   height: 100px;
 }
-
+.introduction--detail--box--content{
+  width: 100%;
+  margin: 10px 0px;
+  padding: 0 8px;
+  border-left: #e6e6fa 2px solid;
+}
 }
 
 </style>

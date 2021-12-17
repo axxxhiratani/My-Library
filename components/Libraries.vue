@@ -160,9 +160,13 @@ export default {
         return "favorite";
       }
     },
-
     // ユーザー情報の取得
     async authenticationUser(){
+      if(this.user){
+        return;
+      }else{
+        // console.log(`userget!!${this.$store.state.user.user_id}`);
+      }
       await firebase.auth().onAuthStateChanged((user) => {
         if(user){
           this.getUserId(user.uid);
@@ -180,8 +184,8 @@ export default {
         params:sendData
       });
       this.user = resData.data.user[0].id;
-      console.log(`loguser::${this.$store.state.user.user_id}`);
-      console.log(this.user);
+      // console.log(`loguser::${this.$store.state.user.user_id}`);
+      // console.log(this.user);
     },
 
     async prepare(){

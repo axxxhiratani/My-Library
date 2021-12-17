@@ -5,6 +5,7 @@
       <span v-bind:class="active__mylibrary"><a class="container--mypage--menu--list" @click="myLibraryList" >自分の辞書</a></span>
       <span v-bind:class="active__create"><a class="container--mypage--menu--list" @click="createLibrary">＋辞書を作成する</a></span>
       <span v-bind:class="active__favolist"><a class="container--mypage--menu--list" @click="favoriteLibrary">お気に入り</a></span>
+      <span v-bind:class="active__userinfo"><a class="container--mypage--menu--list" @click="userInfo">個人情報設定</a></span>
     </div>
   </div>
 </template>
@@ -17,6 +18,7 @@ export default {
       active__mylibrary:"",
       active__create:"",
       active__favolist:"",
+      active__userinfo:"",
     }
   },
   props:["active_page"],
@@ -36,6 +38,11 @@ export default {
         path:"/user/favoritelibrary",
       });
     },
+    userInfo(){
+      this.$router.push({
+        path:"/user/userinfo",
+      });
+    },
     activePage(){
       if(this.active_page === "mylibrary"){
         this.active__mylibrary = "active";
@@ -43,6 +50,8 @@ export default {
         this.active__create ="active";
       }else if(this.active_page === "favolist"){
         this.active__favolist = "active";
+      }else if(this.active_page === "userinfo"){
+        this.active__userinfo = "active";
       }
     },
     checkLogin(){

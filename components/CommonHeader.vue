@@ -212,7 +212,7 @@ header {
   text-decoration: none;
   font-weight: bold;
   color: #191970;
-
+  cursor: pointer;
 }
 .in{
   transform: translateX(100%);

@@ -28,7 +28,7 @@
 
 
         <div class="container--register__input">
-          <validation-provider v-slot="{ errors }" rules="required">
+          <validation-provider v-slot="{ errors }" rules="max:200">
             <label for="wordNote">備考</label><br>
             <textarea wrap="hard" row="5" v-model="wordNote" id="wordNote" type="text" name="備考" class="input--text"></textarea>
             <div class="error">{{ errors[0] }}</div>
@@ -39,7 +39,6 @@
         <div class="container--register__button">
           <button
             type="submit"
-            :disabled="ObserverProps.invalid || !ObserverProps.validated"
             class="input--button">
             追加
           </button>
@@ -102,12 +101,14 @@ export default {
       this.words=resData.data.words[0].words;
     },
     async addWord(){
+      if(this.wordName === "" || this.wordMean === ""){
+        alert("入力漏れがあります。");
+        return;
+      }
       console.log("note1");
       if(this.wordNote === ""){
         this.wordNote = "-";
-        console.log("note2");
       }
-      console.log("note3");
       const sendData = {
         library_id:this.library_id,
         name:this.wordName,

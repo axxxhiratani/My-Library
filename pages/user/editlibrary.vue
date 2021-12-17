@@ -47,7 +47,6 @@
       <div class="container--register__button">
         <button
           @click="editLibrary"
-          :disabled="ObserverProps.invalid || !ObserverProps.validated"
           class="input--button">
           変更
         </button>
