@@ -31,7 +31,7 @@
         </div>
         <div class="introduction--detail--box--content">
           <p class="introduction--detail--box--content--title">辞書の共有</p>
-          <p class="introduction--detail--box--content--content">他のユーザーが作成した辞書を閲覧することができます。また、ブックマーク機能でいつでもお気に入りの辞書を見にいけます。</p>
+          <p class="introduction--detail--box--content--content">他のユーザーが作成した辞書を閲覧することができます。また、気に入った辞書をブックマークに保存することができます。</p>
         </div>
       </div>
     </div>
@@ -107,7 +107,7 @@
 
 }
 .introduction--detail--box{
-  width: 35%;
+  width: 25%;
 }
 .introduction--detail--box--img{
   width: 100%;
@@ -126,7 +126,7 @@
 @media screen and (max-width: 768px) {
   .introduction--detail--box{
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     display: flex;
     justify-content: space-between;
     border: 1px #fffafa solid;
@@ -135,7 +135,7 @@
 
   }
 .introduction--detail--box--img{
-  padding: 30px 5px;
+  padding: 45px 15px;
   width: 100%;
 }
 .introduction--detail--box--img > img{
@@ -144,9 +144,12 @@
 }
 .introduction--detail--box--content{
   width: 100%;
-  margin: 10px 0px;
-  padding: 0 8px;
+  margin: 15px 0px;
+  padding: 0 15px;
   border-left: #e6e6fa 2px solid;
+}
+.introduction--detail--box--content--content{
+  font-size: 5px;
 }
 }
 

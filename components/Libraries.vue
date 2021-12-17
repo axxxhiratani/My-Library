@@ -112,11 +112,11 @@ export default {
             user_id:this.user
           };
           await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite",sendData);
-          message_favo = "お気に入り登録しました";
+          message_favo = "ブックマークに登録しました";
         }else{
             const favorite_id = this.getFavariteId(id);
             await this.$axios.delete("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite/" + favorite_id);
-            message_favo = "お気に入り解除しました";
+            message_favo = "ブックマークから消去しました";
         }
         this.getLibrary();
         this.getFavorite();
@@ -307,7 +307,7 @@ export default {
   }
   .box--library > a > img{
     width: 80%;
-    height: 200px;
+    height: 250px;
     display: inline-block;
     border: 3px solid #fffafa;
     margin-top:10px;

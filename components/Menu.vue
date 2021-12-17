@@ -4,7 +4,7 @@
     <div class="container--mypage--menu">
       <span v-bind:class="active__mylibrary"><a class="container--mypage--menu--list" @click="myLibraryList" >自分の辞書</a></span>
       <span v-bind:class="active__create"><a class="container--mypage--menu--list" @click="createLibrary">＋辞書を作成する</a></span>
-      <span v-bind:class="active__favolist"><a class="container--mypage--menu--list" @click="favoriteLibrary">お気に入り</a></span>
+      <span v-bind:class="active__favolist"><a class="container--mypage--menu--list" @click="favoriteLibrary">ブックマーク</a></span>
       <span v-bind:class="active__userinfo"><a class="container--mypage--menu--list" @click="userInfo">個人情報設定</a></span>
     </div>
   </div>
@@ -100,6 +100,7 @@ export default {
   justify-content: space-around;
 }
 .container--mypage--menu--list{
+  display: inline-block;
   border: #191970 2px solid;
   border-radius: 5px;
   padding: 5px 10px;
