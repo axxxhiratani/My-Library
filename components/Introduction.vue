@@ -149,7 +149,7 @@
   border-left: #e6e6fa 2px solid;
 }
 .introduction--detail--box--content--content{
-  font-size: 5px;
+  font-size: 10px;
 }
 }
 
