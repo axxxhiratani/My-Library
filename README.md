@@ -1,69 +1,62 @@
-# My-Library
+# MyLibrary
 
-## Build Setup
+## 1.アプリ概要
 
-```bash
-# install dependencies
-$ yarn install
+**MyLibrary は、プログラミングのコードやコマンドをまとめた自分だけの辞書を作成できるサービスです。**
 
-# serve with hot reload at localhost:3000
-$ yarn dev
+URL : https://my-library-3e57a.web.app/
 
-# build for production and launch server
-$ yarn build
-$ yarn start
+- スマートホンからもご覧いただけます
 
-# generate static project
-$ yarn generate
-```
+![home](https://user-images.githubusercontent.com/91531795/146631267-2c8079de-c79b-4c60-9352-c9d7bc6fe95b.png)
 
-For detailed explanation on how things work, check out the [documentation](https://nuxtjs.org).
+プログラミング習得にはアウトプット作業が大事だと言われていますが、コード理解して扱うためのインプット作業も重要です。学んだ事を活かしてアウトプット作業をしてる際に、つまづいて教材を行ったり来たりした経験はありませんか？My Library はプログラミング学習者のための良質なインプット環境を提供します。
 
-## Special Directories
+## 2.使用技術
 
-You can create the following extra directories, some of which have special behaviors. Only `pages` is required; you can delete them if you don't want to use their functionality.
+- フロントエンド
+  - HTML
+  - CSS
+  - JavaScript
+  - Vue.js
+  - Nuxt.js
+- バックエンド
+  - PHP
+  - Laravel
+  - MySQL
+  - composer
+  - PHPUnit
+- インフラ
+  - Xampp
+  - FireBase
+  - Heroku
+  - AWS（S3,CloudFront）
 
-### `assets`
+## 3.インフラ構成
 
-The assets directory contains your uncompiled assets such as Stylus or Sass files, images, or fonts.
+![infra](https://user-images.githubusercontent.com/91531795/146634939-ff7dbb44-425c-45cf-a4f8-e0512f5790c7.png)
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/assets).
+## 4.ER 図
 
-### `components`
+![Database drawio](https://user-images.githubusercontent.com/91531795/146630948-43af2256-ed93-4c30-9ae8-fc8ee2ed5f04.png)
 
-The components directory contains your Vue.js components. Components make up the different parts of your page and can be reused and imported into your pages, layouts and even other components.
+## 5.アプリの特徴
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/components).
+- 記憶の定着がしやすい  
+  　　自分の言葉でまとめた辞書を作成することによって記憶に定着しやすくなります。自分の手を動かして学んだことを言語化し、インプットされた記憶を「使える記憶」にしていきます。ただ教材を見てコードやコマンドを書いて終わるのではなく、「何を実装する関数なのか」「どこのタイミングで使えばいいか」などを考えて書き出すことはとても大事です。また、脳にとても良い影響を与えます。なぜなら、右脳でイメージしながら覚えたことを左脳で言語化することで、両方の脳がバランスよく働き、活性化するからです。これらの作業を繰り返すことによって、いつでも取り出せる記憶が増え、自分の力でコードが書けるようになります。  
+   ![create](https://user-images.githubusercontent.com/91531795/146631282-2ace7516-d28c-4bae-8319-4413e2d56110.png)
 
-### `layouts`
+![list](https://user-images.githubusercontent.com/91531795/146631284-8c7811ef-3794-4e7d-8e25-05ed491e91d6.png)
 
-Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
+- 辞書をユーザー間で共有できる  
+  　　作成した辞書をユーザー間で共有する事ができます。他のユーザーが作成した辞書を見ることで視野が広がり、よりプログラミングの理解が深まります。
 
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
+![alllibrary](https://user-images.githubusercontent.com/91531795/146636025-15f0b0cf-327c-464b-84b4-09c48ec74cb7.png)
 
+## 6.アプリの機能一覧
 
-### `pages`
-
-This directory contains your application views and routes. Nuxt will read all the `*.vue` files inside this directory and setup Vue Router automatically.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/get-started/routing).
-
-### `plugins`
-
-The plugins directory contains JavaScript plugins that you want to run before instantiating the root Vue.js Application. This is the place to add Vue plugins and to inject functions or constants. Every time you need to use `Vue.use()`, you should create a file in `plugins/` and add its path to plugins in `nuxt.config.js`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/plugins).
-
-### `static`
-
-This directory contains your static files. Each file inside this directory is mapped to `/`.
-
-Example: `/static/robots.txt` is mapped as `/robots.txt`.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/static).
-
-### `store`
-
-This directory contains your Vuex store files. Creating a file in this directory automatically activates Vuex.
-
-More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/store).
+- 辞書の作成・管理
+- 他ユーザーの辞書検索
+- 辞書内の単語検索
+- ブックマーク登録
+- ユーザー登録・ログイン・ログアウト・退会
