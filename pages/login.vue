@@ -52,7 +52,6 @@ export default {
         .auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then((data) => {
-          console.log(data.user.uid);
           this.uid = data.user.uid;
           this.$router.push('/');
           alert("ログインが完了しました");
@@ -90,7 +89,6 @@ export default {
       {
         params:sendData
       });
-      console.log(resData.data.user[0].name);
       this.$store.commit("user/loginUser",resData.data.user[0]);
     },
 

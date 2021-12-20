@@ -73,7 +73,6 @@ export default {
       {
         params:sendData
       });
-      console.log(`検索結果${resData.data.libraries.length}`);
       this.myLibrary = resData.data.libraries;
       if(resData.data.libraries.length == 0){
         this.message = "見つかりませんでした";
@@ -164,8 +163,6 @@ export default {
     async authenticationUser(){
       if(this.user){
         return;
-      }else{
-        // console.log(`userget!!${this.$store.state.user.user_id}`);
       }
       await firebase.auth().onAuthStateChanged((user) => {
         if(user){
@@ -184,8 +181,6 @@ export default {
         params:sendData
       });
       this.user = resData.data.user[0].id;
-      // console.log(`loguser::${this.$store.state.user.user_id}`);
-      // console.log(this.user);
     },
 
     async prepare(){

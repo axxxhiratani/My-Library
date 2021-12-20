@@ -231,7 +231,7 @@ export default {
 
   .tr--text{
     height: 50px;
-    width: 100%;
+    width: 90%;
     border: solid 2px #e6e6fa;
     border-radius: 5px;
   }

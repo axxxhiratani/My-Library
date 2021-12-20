@@ -13,6 +13,7 @@
 <script>
 import firebase from '~/plugins/firebase'
 export default {
+  middleware: 'auth',
   data() {
     return{
       active__mylibrary:"",
@@ -54,27 +55,9 @@ export default {
         this.active__userinfo = "active";
       }
     },
-    checkLogin(){
-      if(!this.$store.state.user.user_id){
-        try {
-          firebase
-            .auth()
-            .signOut()
-            .then(()=>{
-              alert("エラー：ログアウトしました。");
-              this.$store.commit("user/logoutUser");
-              this.$router.push("/login");
-            });
-        } catch (error) {
-        console.log(error);
-      }
-
-      }
-    },
   },
   created(){
     this.activePage();
-    this.checkLogin();
   }
 }
 </script>
@@ -87,7 +70,6 @@ export default {
   border: 1px #fffafa solid;
   text-align: center;
   box-shadow: 0px 8px 10px #c0c0c0;
-
 }
 .container--mypage--username{
   font-size: 20px;
@@ -113,7 +95,6 @@ export default {
   border-radius: 5px;
   padding: 5px 10px;
   cursor: pointer;
-
 }
 
 </style>
