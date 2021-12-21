@@ -19,7 +19,12 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    ],
+    script: [
+        {
+          src: 'https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js'
+        }
+      ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css

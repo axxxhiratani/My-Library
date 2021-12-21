@@ -201,6 +201,7 @@ header {
 }
 .menu-group--draw{
   padding-top: 80px;
+  padding-right: 25px;
 }
 
 .menu-item--draw{

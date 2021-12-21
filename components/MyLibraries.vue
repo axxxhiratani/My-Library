@@ -36,7 +36,6 @@ export default {
       this.allFavorite = resData.data.favorites;
     },
     showLibrary(id){
-      console.log("show"+id);
       this.$router.push({
         path:"/user/library",
         query:{
@@ -49,7 +48,7 @@ export default {
       changedate(date){
       const dt = Date.parse(date);
       var date = new Date(dt);
-      return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDay()}`;
+      return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
     }
 
   },

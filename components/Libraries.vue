@@ -32,6 +32,11 @@
           </div>
       </div>
     </div>
+    <div class="pagination--container">
+      <a v-for="page in pagination" :key="page" @click="getPage(page)" class="pagination--link">
+        {{page}}
+      </a>
+    </div>
   </div>
 </template>
 
@@ -46,6 +51,7 @@ export default {
       searchName:"",
       allFavorite:[],
       message:null,
+      pagination:[],
     }
   },
   methods:{
@@ -54,6 +60,22 @@ export default {
     async getLibrary(){
       const resData = await this.$axios.get(
           "https://blooming-sierra-76216.herokuapp.com/api/v1/library"
+        );
+      this.myLibrary = resData.data.libraries;
+      for(let i = 1; i <= resData.data.count; i++){
+        this.pagination.push(i);
+      }
+    },
+
+    async getPage(numPage){
+      const sendData = {
+        page:numPage
+      };
+      const resData = await this.$axios.get(
+          "https://blooming-sierra-76216.herokuapp.com/api/v1/library",
+          {
+            params:sendData
+          }
         );
       this.myLibrary = resData.data.libraries;
     },
@@ -66,6 +88,12 @@ export default {
 
     //単語で辞書を検索する。
     async searchLibrary(){
+      this.pagination = [];
+      this.message = null;
+      if(this.searchName ===""){
+        this.getLibrary();
+        return;
+      }
       const sendData = {
         name:this.searchName
       };
@@ -117,7 +145,8 @@ export default {
             await this.$axios.delete("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite/" + favorite_id);
             message_favo = "ブックマークから消去しました";
         }
-        this.getLibrary();
+        // this.pagination = [];
+        // this.getLibrary();
         this.getFavorite();
         alert(message_favo);
       }else{
@@ -194,7 +223,7 @@ export default {
     changedate(date){
       const dt = Date.parse(date);
       var date = new Date(dt);
-      return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDay()}`;
+      return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
     },
   },
   computed:{
@@ -327,12 +356,28 @@ export default {
   .container--library--infomation--create{
     color: #696969;
     font-size: 15px;
+    margin-right: 5px;
   }
 
   .favorite{
     color: red;
     font-weight: bold;
     font-size: 15px;
+  }
+  .pagination--container{
+    text-align: center;
+    margin: 50px;
+  }
+  .pagination--link{
+    display: inline-block;
+    width: 50px;
+    border: #003366 1px solid;
+    cursor: pointer;
+  }
+
+  .pagination--link:hover{
+    background: #003366;
+    color: #ffffff;
   }
 
   @media screen and (max-width: 768px) {

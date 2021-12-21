@@ -41,7 +41,6 @@
 </template>
 
 <style scoped>
-
 .main{
   background: #fff;
   width: 100%;

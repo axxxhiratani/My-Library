@@ -2,8 +2,6 @@
   <div class="container--store">
     <form @submit.prevent="storelibrary">
       <div class="container--store__input"></div>
-      <validation-observer ref="obs" v-slot="ObserverProps">
-
         <div class="container--store__input">
           <validation-provider v-slot="{ errors }" rules="required">
             <label for="name">辞書名</label><br>
@@ -39,12 +37,10 @@
         <div class="container--store__button">
           <button
             type="submit"
-            :disabled="ObserverProps.invalid || !ObserverProps.validated"
             class="input--button">
             作成
           </button>
         </div>
-      </validation-observer>
     </form>
   </div>
 </template>
@@ -57,7 +53,7 @@ export default {
       user_name:this.$store.state.user.user_name,
       language_id:"",
       name:"",
-      view_permit:"",
+      view_permit:0,
       languageList:[],
     }
   },
@@ -65,6 +61,11 @@ export default {
   methods:{
 
     async storelibrary(){
+      if(this.name === "" || this.language_id === "" || this.view_permit === ""){
+        alert("入力漏れがあります。");
+        return;
+      }
+      $('.input--button').css('display','none');
       const sendData = {
         user_id:this.user_id,
         language_id:this.language_id,
@@ -73,6 +74,7 @@ export default {
       };
       console.log(sendData);
       await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/library",sendData);
+      $('.input--button').css('display','inline-block');
       this.$router.push("/user/mypage");
 
     },
@@ -165,6 +167,7 @@ export default {
     border: #191970 2px solid;
     font-weight: bold;
     cursor: pointer;
+    display: inline-block;
   }
 .input--button:hover{
   background: #191970;

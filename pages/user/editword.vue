@@ -7,45 +7,43 @@
   <div class="container--search">
     <form @submit.prevent="addWord">
 
-      <validation-observer ref="obs" v-slot="ObserverProps">
 
-        <div class="container--register__input">
-          <validation-provider v-slot="{ errors }" rules="required">
-            <label for="wordName">単語</label><br>
-            <textarea wrap="hard" row="5" v-model="wordName" id="wordName" type="text" name="単語" class="input--text"></textarea>
-            <div class="error">{{ errors[0] }}</div>
-          </validation-provider>
-        </div>
+      <div class="container--register__input">
+        <validation-provider v-slot="{ errors }" rules="required|max:191">
+          <label for="wordName">単語</label><br>
+          <textarea wrap="hard" row="5" v-model="wordName" id="wordName" type="text" name="単語" class="input--text"></textarea>
+          <div class="error">{{ errors[0] }}</div>
+        </validation-provider>
+      </div>
 
-        <div class="container--register__input">
-          <validation-provider v-slot="{ errors }" rules="required">
-            <label for="wordMean">意味</label><br>
-            <textarea wrap="hard" row="5" v-model="wordMean" id="wordMean" type="text" name="意味" class="input--text"></textarea>
-            <div class="error">{{ errors[0] }}</div>
-          </validation-provider>
-        </div>
-
+      <div class="container--register__input">
+        <validation-provider v-slot="{ errors }" rules="required|max:191">
+          <label for="wordMean">意味</label><br>
+          <textarea wrap="hard" row="5" v-model="wordMean" id="wordMean" type="text" name="意味" class="input--text"></textarea>
+          <div class="error">{{ errors[0] }}</div>
+        </validation-provider>
+      </div>
 
 
-        <div class="container--register__input">
-          <validation-provider v-slot="{ errors }" rules="max:200">
-            <label for="wordNote">備考</label><br>
-            <textarea wrap="hard" row="5" v-model="wordNote" id="wordNote" type="text" name="備考" class="input--text"></textarea>
-            <div class="error">{{ errors[0] }}</div>
-          </validation-provider>
-        </div>
+
+      <div class="container--register__input">
+        <validation-provider v-slot="{ errors }" rules="max:191">
+          <label for="wordNote">備考</label><br>
+          <textarea wrap="hard" row="5" v-model="wordNote" id="wordNote" type="text" name="備考" class="input--text"></textarea>
+          <div class="error">{{ errors[0] }}</div>
+        </validation-provider>
+      </div>
 
 
-        <div class="container--register__button">
-          <button
-            type="submit"
-            class="input--button">
-            追加
-          </button>
-        </div>
+      <div class="container--register__button">
+        <button
+          type="submit"
+          class="input--button">
+          追加
+        </button>
+      </div>
 
 
-      </validation-observer>
 
     </form>
   </div>
@@ -103,9 +101,10 @@ export default {
     async addWord(){
       if(this.wordName === "" || this.wordMean === ""){
         alert("入力漏れがあります。");
+        // $('.input--button').css('display','inline-block');
         return;
       }
-      console.log("note1");
+      $('.input--button').css('display','none');
       if(this.wordNote === ""){
         this.wordNote = "-";
       }
@@ -124,6 +123,7 @@ export default {
       this.wordMean = "";
       this.wordNote = "";
       alert("単語を追加しました。");
+      $('.input--button').css('display','inline-block');
     },
     async updateWord(id,name,meaning,note){
       if(window.confirm("変更を更新しますか？")){
@@ -323,6 +323,7 @@ export default {
     color: #003366;
     border: #191970 solid 2px;
     cursor: pointer;
+    display: inline-block;
   }
   .input--button:hover{
     background: #191970;
