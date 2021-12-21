@@ -38,7 +38,7 @@ URL : https://my-library-3e57a.web.app/
 
 ## 4.ER 図
 
-![Database drawio](https://user-images.githubusercontent.com/91531795/146630948-43af2256-ed93-4c30-9ae8-fc8ee2ed5f04.png)
+![Database drawio](https://user-images.githubusercontent.com/91531795/146883057-514adaca-75cb-4ad3-9f87-f879b8838166.png)
 
 ## 5.アプリの特徴
 
