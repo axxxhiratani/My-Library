@@ -18,12 +18,12 @@ URL : https://my-library-3e57a.web.app/
   - HTML
   - CSS
   - JavaScript
-  - Vue.js
-  - Nuxt.js
+  - Vue.js 2.6.14
+  - Nuxt.js 2.15.8
 - バックエンド
-  - PHP
-  - Laravel
-  - MySQL
+  - PHP 8.0.13
+  - Laravel 8.75.0
+  - MySQL 15.1
   - composer
   - PHPUnit
 - インフラ
