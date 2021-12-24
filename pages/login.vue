@@ -56,6 +56,7 @@ export default {
           this.uid = data.user.uid;
           this.$router.push('/');
           alert("ログインが完了しました");
+          return;
         })
         .catch((error) => {
           switch (error.code) {
@@ -75,8 +76,8 @@ export default {
               alert('エラーが起きました。しばらくしてから再度お試しください。')
               break
           }
+          location.reload();
         });
-        this.$router.push("/");
       } catch {
         alert("メールアドレスまたはパスワードが間違っております");
       }

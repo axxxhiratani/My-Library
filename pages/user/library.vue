@@ -32,10 +32,10 @@
         </div>
         <div class="copy"><a @click="copyWord(word.id)" class="copy--button">コピー</a></div>
         <div class="td">
-          <textarea wrap="hard" row="5" type="text" v-bind:value="word.meaning" class="tr--text" disabled></textarea>
+          <textarea wrap="hard" row="5" type="text" v-bind:value="word.meaning" class="tr--text"></textarea>
           </div>
         <div class="td">
-          <textarea wrap="hard" row="5" type="text" v-bind:value="word.note" class="tr--text" disabled></textarea>
+          <textarea wrap="hard" row="5" type="text" v-bind:value="word.note" class="tr--text"></textarea>
 
           </div>
       </div>
