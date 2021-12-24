@@ -1,6 +1,10 @@
 <template>
 <div class="main">
 
+<div class="loader-wrap">
+  <div class="loader">Loading...</div>
+</div>
+
   <div class="title--columu">
     <p class="title--everyone">
       みんなの辞書
@@ -37,6 +41,7 @@
         {{page}}
       </a>
     </div>
+
   </div>
 </template>
 
@@ -131,6 +136,10 @@ export default {
     },
     //イイネを増やす/減らす
     async countUpFavorite(id){
+
+      var loader = $('.loader-wrap');
+      loader.fadeIn();
+
       let message_favo = "";
       if(this.user){
         if(this.checkFavorite(id)){
@@ -148,7 +157,8 @@ export default {
         // this.pagination = [];
         // this.getLibrary();
         this.getFavorite();
-        alert(message_favo);
+        loader.fadeOut();
+        // alert(message_favo);
       }else{
         alert("ログインしてください");
       }
@@ -212,10 +222,16 @@ export default {
       this.user = resData.data.user[0].id;
     },
 
+    load(){
+      var loader = $('.loader-wrap');
+      loader.fadeOut();
+    },
+
     async prepare(){
       await this.authenticationUser();
       await this.getLibrary();
       await this.getFavorite();
+      await this.load();
     }
   },
 
@@ -226,6 +242,7 @@ export default {
       return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
     },
   },
+
   computed:{
   },
   created(){
@@ -379,7 +396,82 @@ export default {
     background: #003366;
     color: #ffffff;
   }
+  .container--library--infomation--favorite{
+    display: block;
+  }
+/*▼▼ ここから追加する ▼▼*/
+.loader-wrap {
+	position: fixed;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  left: 0%;
+  top: 0%;
+}
+/*▲▲ ここまで追加する ▲▲*/
 
+.loader,
+.loader:before,
+.loader:after {
+	background: #ff8c00;
+	-webkit-animation: load1 1s infinite ease-in-out;
+	animation: load1 1s infinite ease-in-out;
+	width: 1em;
+	height: 4em;
+}
+.loader {
+	color: #ff8c00;
+	text-indent: -9999em;
+	margin: 88px auto;
+	position: relative;
+	font-size: 11px;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+	position: absolute;
+	top: 0;
+	content: '';
+}
+.loader:before {
+	left: -1.5em;
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+}
+.loader:after {
+	left: 1.5em;
+}
+@-webkit-keyframes load1 {
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 0;
+		height: 4em;
+	}
+	40% {
+		box-shadow: 0 -2em;
+		height: 5em;
+	}
+}
+@keyframes load1 {
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 0;
+		height: 4em;
+	}
+	40% {
+		box-shadow: 0 -2em;
+		height: 5em;
+	}
+}
   @media screen and (max-width: 768px) {
     .box--library{
       width: 90%;

@@ -1,7 +1,12 @@
 <template>
 <div class="main">
-  <div class="edit--title">
-    <a @click="back">戻る</a>
+
+  <div class="loader-wrap">
+    <div class="loader">Loading...</div>
+  </div>
+
+  <div class="edit--title" @click="back">
+    <a>戻る</a>
   </div>
 
   <div class="container--search">
@@ -97,14 +102,15 @@ export default {
       const resData = await this.$axios.get(`https://blooming-sierra-76216.herokuapp.com/api/v1/library/${this.library_id}`);
       this.library_name = resData.data.words[0].name;
       this.words=resData.data.words[0].words;
+      this.load();
     },
     async addWord(){
       if(this.wordName === "" || this.wordMean === ""){
         alert("入力漏れがあります。");
-        // $('.input--button').css('display','inline-block');
         return;
       }
-      $('.input--button').css('display','none');
+      var loader = $('.loader-wrap');
+      loader.fadeIn();
       if(this.wordNote === ""){
         this.wordNote = "-";
       }
@@ -122,8 +128,7 @@ export default {
       this.wordName = "";
       this.wordMean = "";
       this.wordNote = "";
-      alert("単語を追加しました。");
-      $('.input--button').css('display','inline-block');
+      loader.fadeOut();
     },
     async updateWord(id,name,meaning,note){
       if(window.confirm("変更を更新しますか？")){
@@ -157,7 +162,6 @@ export default {
       this.$router.push({
         path:"",
         query:{
-
         }
       });
     },
@@ -168,6 +172,11 @@ export default {
           library_id:this.library_id
         }
       });
+    },
+
+    load(){
+      var loader = $('.loader-wrap');
+      loader.fadeOut();
     },
   },
   created(){
@@ -329,6 +338,86 @@ export default {
     background: #191970;
     color: #e6e6fa;
   }
+
+/*▼▼ ここから追加する ▼▼*/
+.loader-wrap {
+	position: fixed;
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+  left: 0%;
+  top: 0%;
+}
+/*▲▲ ここまで追加する ▲▲*/
+
+.loader,
+.loader:before,
+.loader:after {
+	background: #ff8c00;
+	-webkit-animation: load1 1s infinite ease-in-out;
+	animation: load1 1s infinite ease-in-out;
+	width: 1em;
+	height: 4em;
+}
+.loader {
+	color: #ff8c00;
+	text-indent: -9999em;
+	margin: 88px auto;
+	position: relative;
+	font-size: 11px;
+	-webkit-transform: translateZ(0);
+	-ms-transform: translateZ(0);
+	transform: translateZ(0);
+	-webkit-animation-delay: -0.16s;
+	animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+	position: absolute;
+	top: 0;
+	content: '';
+}
+.loader:before {
+	left: -1.5em;
+	-webkit-animation-delay: -0.32s;
+	animation-delay: -0.32s;
+}
+.loader:after {
+	left: 1.5em;
+}
+@-webkit-keyframes load1 {
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 0;
+		height: 4em;
+	}
+	40% {
+		box-shadow: 0 -2em;
+		height: 5em;
+	}
+}
+@keyframes load1 {
+	0%,
+	80%,
+	100% {
+		box-shadow: 0 0;
+		height: 4em;
+	}
+	40% {
+		box-shadow: 0 -2em;
+		height: 5em;
+	}
+}
+  @media screen and (max-width: 768px) {
+    .box--library{
+      width: 90%;
+    }
+  }
+
 
 
  @media screen and (max-width: 768px) {

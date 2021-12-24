@@ -184,9 +184,10 @@ export default {
   }
   .td{
     display: inline-block;
-    width: 30%;
+    width: 40%;
     height: auto;
     text-align: center;
+    margin: 0 2px;
     padding: 5px 0;
   }
   .copy{

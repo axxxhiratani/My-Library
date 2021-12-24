@@ -1,60 +1,57 @@
 <template>
 <div class="main">
-  <div class="edit--title">
-    <a @click="back">戻る</a>
+  <div class="edit--title" @click="back">
+    <a>戻る</a>
   </div>
 
   <div class="container--search">
-    <validation-observer ref="obs" v-slot="ObserverProps">
+    <div class="container--register__input">
+      <validation-provider v-slot="{ errors }" rules="required">
+        <label for="libraryName">辞書名</label><br>
+        <input type="text" id="libraryName" v-model="libraryName" class="input--text" name="辞書名">
+        <div class="error">{{ errors[0] }}</div>
+      </validation-provider>
+    </div>
 
-      <div class="container--register__input">
-        <validation-provider v-slot="{ errors }" rules="required">
-          <label for="libraryName">辞書名</label><br>
-          <input type="text" id="libraryName" v-model="libraryName" class="input--text" name="辞書名">
-          <div class="error">{{ errors[0] }}</div>
-        </validation-provider>
-      </div>
-
-      <div class="container--register__input">
-        <validation-provider v-slot="{ errors }" rules="required">
-          <label for="libraryLanguage">言語</label><br>
-          <select name="使用言語" v-model="libraryLanguage" id="libraryLanguage" class="input--select">
-            <option v-bind:value="language.id" v-for="language in languageList" :key="language.id">
-              {{language.name}}
-            </option>
-          </select><br>
-          <div class="error">{{ errors[0] }}</div>
-        </validation-provider>
-      </div>
+    <div class="container--register__input">
+      <validation-provider v-slot="{ errors }" rules="required">
+        <label for="libraryLanguage">言語</label><br>
+        <select name="使用言語" v-model="libraryLanguage" id="libraryLanguage" class="input--select">
+          <option v-bind:value="language.id" v-for="language in languageList" :key="language.id">
+            {{language.name}}
+          </option>
+        </select><br>
+        <div class="error">{{ errors[0] }}</div>
+      </validation-provider>
+    </div>
 
 
 
-      <div class="container--register__input">
-        <validation-provider v-slot="{ errors }" rules="required">
-          <label for="libraryPermit">公開設定</label><br>
+    <div class="container--register__input">
+      <validation-provider v-slot="{ errors }" rules="required">
+        <label for="libraryPermit">公開設定</label><br>
 
-          <input v-model="libraryPermit" type="radio" name="公開設定" value="1" checked>公開
-          <input v-model="libraryPermit" type="radio" name="公開設定" value="0">非公開
+        <input v-model="libraryPermit" type="radio" name="公開設定" value="1" checked>公開
+        <input v-model="libraryPermit" type="radio" name="公開設定" value="0">非公開
 
 
 
 
-          <div class="error">{{ errors[0] }}</div>
-        </validation-provider>
-      </div>
+        <div class="error">{{ errors[0] }}</div>
+      </validation-provider>
+    </div>
 
 
-      <div class="container--register__button">
-        <button
-          @click="editLibrary"
-          class="input--button">
-          変更
-        </button>
-        <button @click="deleteLibrary" class="input--button">
-          削除
-        </button>
-      </div>
-    </validation-observer>
+    <div class="container--register__button">
+      <button
+        @click="editLibrary"
+        class="input--button">
+        変更
+      </button>
+      <button @click="deleteLibrary" class="input--button">
+        削除
+      </button>
+    </div>
   </div>
 </div>
 </template>
