@@ -10,12 +10,37 @@
       みんなの辞書
     </p>
   </div>
+
+
   <div class="container--search">
-    <form @submit.prevent="searchLibrary">
-      <input type="text" v-model="searchName" class="input--text">
-      <button type="submit" class="input--button">検索</button>
-    </form>
+    <div class="container--search--select">
+      <div class="container--search--select--word" @click="selectWord">
+        辞書名
+      </div>
+      <div class="container--search--select--language" @click="selectLanguage">
+        言語名
+      </div>
+    </div>
+    <div class="container--search--word">
+      <form @submit.prevent="searchLibraryByWord">
+        <input type="text" v-model="searchName" class="input--text">
+        <button type="submit" class="input--button">検索</button>
+      </form>
+    </div>
+    <div class="container--search--language">
+      <form @submit.prevent="searchLibraryByLibrary">
+        <select name="使用言語" v-model="language_id" id="language_id" class="input--text">
+          <option v-bind:value="language.id" v-for="language in languagelist" :key="language.id">
+            {{language.name}}
+          </option>
+        </select>
+        <button type="submit" class="input--button">検索</button>
+      </form>
+    </div>
   </div>
+
+
+
   <div class="container--library">
     <div v-show="message" class="message">{{message}}</div>
     <div class="box--library" v-for="library in myLibrary" :key="library.id" v-show="library.view_permit">
@@ -57,6 +82,8 @@ export default {
       allFavorite:[],
       message:null,
       pagination:[],
+      languagelist:[],
+      language_id:1,
     }
   },
   methods:{
@@ -85,6 +112,12 @@ export default {
       this.myLibrary = resData.data.libraries;
     },
 
+    // 存在する言語を全て抽出する
+    async getLanguage(){
+      const resData = await this.$axios.get("https://blooming-sierra-76216.herokuapp.com/api/v1/language");
+      this.languagelist = resData.data.languages;
+    },
+
     // 存在するイイネを全て抽出する
     async getFavorite(){
       const resData = await this.$axios.get("https://blooming-sierra-76216.herokuapp.com/api/v1/favorite");
@@ -92,7 +125,7 @@ export default {
     },
 
     //単語で辞書を検索する。
-    async searchLibrary(){
+    async searchLibraryByWord(){
       this.pagination = [];
       this.message = null;
       if(this.searchName ===""){
@@ -112,6 +145,58 @@ export default {
       }else{
         this.message = null;
       }
+    },
+    //言語で辞書を検索する。
+    async searchLibraryByLibrary(){
+      this.pagination = [];
+      this.message = null;
+      if(this.language_id ===""){
+        this.getLibrary();
+        return;
+      }
+      const sendData = {
+        language:this.language_id
+      };
+      const resData = await this.$axios.get("https://blooming-sierra-76216.herokuapp.com/api/v1/investigate/librarylanguage",
+      {
+        params:sendData
+      });
+      this.myLibrary = resData.data.libraries;
+      if(resData.data.libraries.length == 0){
+        this.message = "見つかりませんでした";
+      }else{
+        this.message = null;
+      }
+    },
+
+    selectWord(){
+      var target__word = $('.container--search--word');
+      var target__language = $('.container--search--language');
+      var target__word__select = $('.container--search--select--word');
+      var target__language__select = $('.container--search--select--language');
+
+      target__word.css("display","block");
+      target__word__select.css("background","#003366");
+      target__word__select.css("color","#fff");
+
+      target__language.css("display","none");
+      target__language__select.css("background","#fff");
+      target__language__select.css("color","#000");
+    },
+
+    selectLanguage(){
+      var target__word = $('.container--search--word');
+      var target__language = $('.container--search--language');
+      var target__word__select = $('.container--search--select--word');
+      var target__language__select = $('.container--search--select--language');
+
+      target__word.css("display","none");
+      target__word__select.css("background","#fff");
+      target__word__select.css("color","#000");
+
+      target__language.css("display","block");
+      target__language__select.css("background","#003366");
+      target__language__select.css("color","#fff");
     },
 
     //辞書を表示するページに遷移させる。
@@ -231,6 +316,7 @@ export default {
       await this.authenticationUser();
       await this.getLibrary();
       await this.getFavorite();
+      await this.getLanguage();
       await this.load();
     }
   },
@@ -300,7 +386,35 @@ export default {
   width: 100%;
   margin: 0 auto;
   text-align: center;
-
+}
+.container--search--word{
+  display: block;
+}
+.container--search--language{
+  display: none;
+}
+.container--search--select{
+  width: 30%;
+  border: #003366 2px solid;
+  margin: 0 auto;
+  display: flex;
+  margin-bottom: 15px;
+}
+.container--search--select--word{
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  background: #003366;
+  color: #fff;
+  padding: 5px 10px;
+}
+.container--search--select--language{
+  width: 50%;
+  text-align: center;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  padding: 5px 10px;
 }
 .container--library{
   width: 100%;
