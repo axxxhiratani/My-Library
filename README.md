@@ -4,7 +4,11 @@
 
 **MyLibrary は、プログラミングのコードやコマンドをまとめた自分だけの辞書を作成できるサービスです。**
 
-URL : https://my-library-3e57a.web.app/
+- アプリケーション URL  
+  https://my-library-3e57a.web.app/
+
+- バックエンドリポジトリ  
+  https://github.com/axxxhiratani/MyLibrary/tree/master/mylibrary
 
 - スマートホンからもご覧いただけます
 
