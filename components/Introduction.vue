@@ -35,11 +35,85 @@
         </div>
       </div>
     </div>
+      <div class="introduction--guest">
+        <a v-show="!user" @click="login" class="introduction--guest--link">ゲストログイン</a>
+      </div>
   </div>
 
 </div>
 </template>
-
+<script>
+import firebase from '~/plugins/firebase'
+export default {
+  data() {
+    return{
+      user:null,
+      email:"guest@gmail.com",
+      password:"16jfa2719j19ed",
+      uid:null,
+    }
+  },
+  methods:{
+    async login(){
+      await this.getFirebase();
+      await this.getUserId();
+    },
+    authenticationUser(){
+      firebase.auth().onAuthStateChanged((user) => {
+        this.user=user;
+      })
+    },
+    async getFirebase() {
+      try {
+        await firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then((data) => {
+          this.uid = data.user.uid;
+          this.$router.push('/');
+          alert("ログインが完了しました");
+          return;
+        })
+        .catch((error) => {
+          switch (error.code) {
+            case 'auth/invalid-email':
+              alert('メールアドレスの形式が違います。')
+              break
+            case 'auth/user-disabled':
+              alert('ユーザーが無効になっています。')
+              break
+            case 'auth/user-not-found':
+              alert('ユーザーが存在しません。')
+              break
+            case 'auth/wrong-password':
+              alert('パスワードが間違っております。')
+              break
+            default:
+              alert('エラーが起きました。しばらくしてから再度お試しください。')
+              break
+          }
+          location.reload();
+        });
+      } catch {
+        alert("メールアドレスまたはパスワードが間違っております");
+      }
+    },
+    async getUserId(uid){
+      const sendData = {
+        uuid:this.uid,
+      };
+      const resData = await this.$axios.get("https://blooming-sierra-76216.herokuapp.com/api/v1/investigate/userid",
+      {
+        params:sendData
+      });
+      this.$store.commit("user/loginUser",resData.data.user[0]);
+    },
+  },
+  created(){
+    this.authenticationUser();
+  }
+}
+</script>
 <style scoped>
 .main{
   background: #fff;
@@ -103,7 +177,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-
 }
 .introduction--detail--box{
   width: 25%;
@@ -121,6 +194,25 @@
 }
 .introduction--detail--box--content--content{
   font-size: 10px;
+}
+.introduction--guest{
+  margin: 50px auto;
+  text-align: center;
+}
+
+.introduction--guest--link{
+  display: inline-block;
+  width: 30%;
+  text-align: center;
+  border: #003366 2px solid;
+  text-decoration: none;
+  color: #000;
+  border-radius: 10px;
+  padding: 10px 20px;
+}
+.introduction--guest--link:hover{
+  background: #003366;
+  color: #fff;
 }
 @media screen and (max-width: 768px) {
   .introduction--detail--box{
