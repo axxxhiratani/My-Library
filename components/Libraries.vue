@@ -246,6 +246,9 @@ export default {
         // alert(message_favo);
       }else{
         alert("ログインしてください");
+        this.$router.push({
+        path:"/login"
+        });
       }
     },
 
