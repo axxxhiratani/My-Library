@@ -209,6 +209,7 @@ export default {
   color: #000;
   border-radius: 10px;
   padding: 10px 20px;
+  cursor: pointer;
 }
 .introduction--guest--link:hover{
   background: #003366;
