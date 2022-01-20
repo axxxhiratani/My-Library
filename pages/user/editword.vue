@@ -5,16 +5,16 @@
     <div class="loader">Loading...</div>
   </div>
 
-  <div class="edit--title" @click="back">
+  <div class="edit--title" @click="back" @reset.prevent="onReset">
     <a>戻る</a>
   </div>
 
   <div class="container--search">
-    <form @submit.prevent="addWord">
+    <form name="form" @submit.prevent="addWord" @reset.prevent="onReset">
 
 
       <div class="container--register__input">
-        <validation-provider v-slot="{ errors }" rules="required|max:191">
+        <validation-provider v-slot="{ errors }" ref="obs" rules="required|max:191">
           <label for="wordName">単語</label><br>
           <textarea wrap="hard" row="5" v-model="wordName" id="wordName" type="text" name="単語" class="input--text"></textarea>
           <div class="error">{{ errors[0] }}</div>
@@ -22,7 +22,7 @@
       </div>
 
       <div class="container--register__input">
-        <validation-provider v-slot="{ errors }" rules="required|max:191">
+        <validation-provider v-slot="{ errors }" ref="obsmore" rules="required|max:191">
           <label for="wordMean">意味</label><br>
           <textarea wrap="hard" row="5" v-model="wordMean" id="wordMean" type="text" name="意味" class="input--text"></textarea>
           <div class="error">{{ errors[0] }}</div>
@@ -122,12 +122,7 @@ export default {
       };
       await this.$axios.post("https://blooming-sierra-76216.herokuapp.com/api/v1/word",sendData);
       this.getLibrary();
-      document.getElementById("wordName").value = "";
-      document.getElementById("wordMean").value = "";
-      document.getElementById("wordNote").value = "";
-      this.wordName = "";
-      this.wordMean = "";
-      this.wordNote = "";
+      document.form.reset();
       loader.fadeOut();
     },
     async updateWord(id,name,meaning,note){
@@ -165,6 +160,15 @@ export default {
         }
       });
     },
+    onReset() {
+      this.wordName = '';
+      this.wordMean = '';
+      this.wordNote = '';
+      console.log("reset");
+      this.$refs.obs.reset();
+      this.$refs.obsmore.reset();
+    },
+
     back(){
       this.$router.push({
         path:"/user/library",
