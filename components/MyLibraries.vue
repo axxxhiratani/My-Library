@@ -29,7 +29,6 @@ export default {
       const resData = await this.$axios.get(
           `https://blooming-sierra-76216.herokuapp.com/api/v1/user/${this.user_id}`
         );
-      console.log(resData.data.libraries[0].libraries);
       this.myLibrary = resData.data.libraries[0].libraries;
     },
     async getFavorite(){
