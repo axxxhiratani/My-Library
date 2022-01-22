@@ -2,9 +2,9 @@
   <div class="container--library">
     <div class="box--library" v-for="library in myLibrary" :key="library.id">
       <a @click="showLibrary(library.id)">
-        <img v-bind:src="library.language_id[0].image" alt="">
+        <img v-bind:src="library.language_id.image" alt="">
         <p class="container--library--name">{{library.name}}</p>
-        <p class="container--library--text">使用言語：{{library.language_id[0].name}}</p>
+        <p class="container--library--text">使用言語：{{library.language_id.name}}</p>
         <div class="container--library--infomation">
           <p class="container--library--infomation--create">作成日：{{library.created_at | changedate}}</p>
         </div>
@@ -29,6 +29,7 @@ export default {
       const resData = await this.$axios.get(
           `https://blooming-sierra-76216.herokuapp.com/api/v1/user/${this.user_id}`
         );
+      console.log(resData.data.libraries[0].libraries);
       this.myLibrary = resData.data.libraries[0].libraries;
     },
     async getFavorite(){
