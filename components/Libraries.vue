@@ -106,7 +106,7 @@ export default {
     },
 
     async getPage(url){
-
+      console.log(url);
       const sendData = {
         name:this.searchName,
         language:this.language_id
