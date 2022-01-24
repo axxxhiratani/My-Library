@@ -62,9 +62,17 @@
       </div>
     </div>
     <div class="pagination--container">
-      <a v-for="page in pagination" :key="page" @click="getPage(page)" class="pagination--link">
-        {{page}}
-      </a>
+      <div v-for="page in pagination" :key="page.label" @click="getPage(page.url)" v-bind:class="activePage(page.active)">
+        <a v-if="page.label ==='&laquo; Previous'">
+          ＜
+        </a>
+        <a v-else-if="page.label ==='Next &raquo;'">
+          ＞
+        </a>
+        <a v-else>
+          {{page.label}}
+        </a>
+      </div>
     </div>
 
   </div>
@@ -93,23 +101,24 @@ export default {
       const resData = await this.$axios.get(
           "https://blooming-sierra-76216.herokuapp.com/api/v1/library"
         );
-      this.myLibrary = resData.data.libraries;
-      for(let i = 1; i <= resData.data.count; i++){
-        this.pagination.push(i);
-      }
+      this.myLibrary = resData.data.libraries.data;
+      this.pagination = resData.data.libraries.links;
     },
 
-    async getPage(numPage){
+    async getPage(url){
+
       const sendData = {
-        page:numPage
+        name:this.searchName,
+        language:this.language_id
       };
-      const resData = await this.$axios.get(
-          "https://blooming-sierra-76216.herokuapp.com/api/v1/library",
-          {
-            params:sendData
-          }
-        );
-      this.myLibrary = resData.data.libraries;
+      if(!url){
+        return;
+      }
+      const resData = await this.$axios.get(url,{
+        params:sendData
+      });
+      this.myLibrary = resData.data.libraries.data;
+      this.pagination = resData.data.libraries.links;
     },
 
     // 存在する言語を全て抽出する
@@ -139,8 +148,9 @@ export default {
       {
         params:sendData
       });
-      this.myLibrary = resData.data.libraries;
-      if(resData.data.libraries.length == 0){
+      this.myLibrary = resData.data.libraries.data;
+      this.pagination = resData.data.libraries.links;
+      if(resData.data.libraries.data.length == 0){
         this.message = "見つかりませんでした";
       }else{
         this.message = null;
@@ -161,8 +171,9 @@ export default {
       {
         params:sendData
       });
-      this.myLibrary = resData.data.libraries;
-      if(resData.data.libraries.length == 0){
+      this.myLibrary = resData.data.libraries.data;
+      this.pagination = resData.data.libraries.links;
+      if(resData.data.libraries.data.length == 0){
         this.message = "見つかりませんでした";
       }else{
         this.message = null;
@@ -286,6 +297,17 @@ export default {
         return "favorite";
       }
     },
+    //ページネーションの装飾
+    activePage(data){
+      let style = "";
+      if(data){
+        style = "pagination--link active";
+      }else{
+        style = "pagination--link"
+      }
+      return style;
+    },
+
     // ユーザー情報の取得
     async authenticationUser(){
       if(this.user){
@@ -329,7 +351,7 @@ export default {
       const dt = Date.parse(date);
       var date = new Date(dt);
       return `${date.getFullYear()}/${date.getMonth()+1}/${date.getDate()}`;
-    },
+    }
   },
 
   computed:{
@@ -497,6 +519,10 @@ export default {
     color: red;
     font-weight: bold;
     font-size: 15px;
+  }
+  .active{
+    background: #003366;
+    color: #fff;
   }
   .pagination--container{
     text-align: center;
