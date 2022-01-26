@@ -153,8 +153,6 @@ export default {
           language_id:this.language_id,
           introduction:this.introduction,
         });
-        console.log(`register data ${resData.data.user.id}`);
-        console.log(`register data ${resData.data.user.name}`);
         this.$store.commit("user/loginUser",resData.data.user);
         alert("登録が完了しました");
       }catch{
@@ -165,14 +163,12 @@ export default {
       const resData = await this.$axios.get(
         "https://blooming-sierra-76216.herokuapp.com/api/v1/work"
       );
-      console.log(resData);
       this.workList = resData.data.works;
     },
     async getLanguage(){
       const resData = await this.$axios.get(
         "https://blooming-sierra-76216.herokuapp.com/api/v1/language"
       );
-      console.log(resData);
       this.languageList = resData.data.languages;
     },
   },

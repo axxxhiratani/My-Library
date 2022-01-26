@@ -83,6 +83,9 @@ export default {
   box-shadow: 0px 8px 10px #c0c0c0;
   cursor: pointer;
 }
+.box--library:hover{
+  background: #f5f5f5;
+}
 .container--search{
   margin: 10px auto;
   width: 80%;
